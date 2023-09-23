@@ -1,7 +1,10 @@
 const express = require('express')
 const cors = require('cors')
-const dataAtual = new Date("Mar 25 2015")
 const app = express()
+
+const hoje = new Date()
+const data = hoje.getDate().toString().padStart(2,0) + "/" + String(hoje.getMonth() + 1).padStart(2,'0') + "/" + hoje.getFullYear() + ` as ` + hoje.toLocaleTimeString()
+
 
 app.listen(5550, () => console.log('Rodando na porta 5550'))
 app.use(cors())
@@ -10,31 +13,17 @@ app.use(express.json())
 let notices = [
   {
     id: 1,
-    date: dataAtual,
-    title: 'Anuncio 1',
-    mensagem: 'Mensagem do anuncio 1',
-    img: '',
+    date: data,
+    title: 'Fique por dentro',
+    mensagem: 'Aqui você tem todas as notícias e informações sobre seus benefícios!',
+    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX2zW5rDCoG_sRJkK7JltISOIxclfsaQNVbg2GgMdxYcPQ_6kBbgk8pnaOV1Y8bASDLf0&usqp=CAU',
   },
-  {
+    {
     id: 2,
-    date: dataAtual,
-    title: 'Anuncio 2',
-    mensagem: 'Mensagem do anuncio 2',
-    img: '',
-  },
-  {
-    id: 3,
-    date: dataAtual,
-    title: 'Anuncio 3',
-    mensagem: 'Mensagem do anuncio 3',
-    img: '',
-  },
-  {
-    id: 4,
-    date: dataAtual,
-    title: 'Anuncio 4',
-    mensagem: 'Mensagem do anuncio 4',
-    img: '',
+    date: data,
+    title: 'NOVA ATUALIZAÇÃO',
+    mensagem: 'Agora você pode solicitar nossos serviços, é facil!',
+    img: 'https://t3.ftcdn.net/jpg/04/51/58/68/360_F_451586836_NNmw4WcMDEaPQHrtAzL6kRFNunp4eq1e.jpg',
   },
 ]
 
@@ -92,14 +81,14 @@ let users = [
       "date": "2023-03-09T02:49:05.342Z",
       "nome": "Ana Carolina Costa Dantas ",
       "idade": "34",
-      "cpf": "10651738490",
+      "cpf": "106.517.384-90",
       "address": "José Paulino Cavalcante  63 popular santa Rita ",
       "phone": "98626997",
       "parentsCount": "Eu e mais duas pessoas",
       "parentsName": "minha filha Ana Júlia Costa Dantas esposo Edvaldo Dantas da costa ",
       "nis": "14703982273",
       "question1": "Não. Esse é meu primeiro contato.",
-      "question2": "muito bom ",
+      "question2": "muito bom",
       "isVolt": false,
       "isAutist": false
     },
@@ -140,7 +129,7 @@ let users = [
       "date": "2023-03-09T09:08:39.935Z",
       "nome": "Lidiane Pereira Bezerra",
       "idade": "",
-      "cpf": "9203425403",
+      "cpf": "920.342.540-3",
       "address": "Rua Maestro Pedro Santos 250 bairro Tibiri 3 Jardim Europa 1 cidade Santa Rita",
       "phone": "83 88 53-82 68",
       "parentsCount": "Eu e mais três pessoas",
@@ -172,7 +161,7 @@ let users = [
       "date": "2023-03-09T09:41:39.538Z",
       "nome": "Josilene da silva cabral  Rafael justino da silva",
       "idade": "27",
-      "cpf": "70102972400",
+      "cpf": "701.029.724-00",
       "address": "Irmã antonieta quadra 11 lote 06",
       "phone": "987622787",
       "parentsCount": "Eu e mais três pessoas",
@@ -188,7 +177,7 @@ let users = [
       "date": "2023-03-09T09:43:08.603Z",
       "nome": "Jaqueline de Freitas Silva",
       "idade": "31",
-      "cpf": "10475245466",
+      "cpf": "104.752.454-66",
       "address": "Rua: Padre Geraldo Pinto N: 01 Marcos Moura",
       "phone": "83986654061",
       "parentsCount": "Eu e mais duas pessoas",
@@ -204,7 +193,7 @@ let users = [
       "date": "2023-03-09T09:47:22.261Z",
       "nome": "Marília keite da conceição Guedes ",
       "idade": "38",
-      "cpf": "4790864430",
+      "cpf": "479.086.443-0",
       "address": "Rua Antônio lira, 25 ",
       "phone": "(83)98858-6304",
       "parentsCount": "Eu e mais duas pessoas",
@@ -252,7 +241,7 @@ let users = [
       "date": "2023-03-09T10:41:26.985Z",
       "nome": "Elaine Da Silva Rocha ",
       "idade": "27",
-      "cpf": "71054351440",
+      "cpf": "710.543.514-40",
       "address": "Rua Damião 75 tibirei dois Santa Rita",
       "phone": "987879553",
       "parentsCount": "Eu e mais três pessoas",
@@ -4479,7 +4468,7 @@ let users = [
     {
       id: 274,
       status: false,
-      date: dataAtual,
+      date: data,
       nome: 'Matheus Tester',
       idade: 30,
       avatar: "https://instagram.fjpa9-1.fna.fbcdn.net/v/t51.2885-19/371451584_679092440943712_7467185518078917342_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fjpa9-1.fna.fbcdn.net&_nc_cat=104&_nc_ohc=gKSPSH9vAdkAX81Y6f-&edm=ACWDqb8BAAAA&ccb=7-5&oh=00_AfDXSCkQL7w1xKoX_VDKYGE_kV4jWvxZAWWgrWBKTxHqMw&oe=650AABA8&_nc_sid=ee9879",
@@ -4501,18 +4490,74 @@ let users = [
       question2: "Todos focados pela comunidade!"
     },
 ]
-
 let solicitations = [
   {
     id: 1,
-    date: dataAtual,
-    nome: 'Maria das Neves',
-    requireService: {
-      isAutist: "Solicitar cartão PIUD",
-      status: 'Aguardando...',
-    },
-  }
+    date: String,
+    userInfo: Object,
+    nome: String,
+    cpf: String,
+    service: String,
+    pasta: String,
+    status: String
+  },
 ];
+let aprovados = [
+  {
+    id: 1,
+    nome: String,
+    service: String,
+    status: String,
+    date: String
+  },
+];
+
+app.route('/require/aprovados').get((req, res) => res.json({
+  aprovados
+}))
+app.route('/require/aprovados').post((req, res) => {
+  const lastId = aprovados[aprovados?.length - 1]?.id
+  aprovados.push({
+    id: lastId + 1,
+    date: data,
+    nome: req.body.nome,
+    service: req.body.service,
+    status: req.body.status
+  })
+  res.json('Solicitação aprovada!')
+})
+app.route('/require/aprovados/:id').put((req, res) => {
+  const aprovadoId = req.params.id
+
+  const aprovado = aprovados.find(aprovado => Number(aprovado.id) === Number(aprovadoId))
+
+  if (!aprovado) {
+    return res.json('Usuário não encontrado!')
+  }
+
+  const updatedAprovado = {
+    ...aprovados,
+    date: data,
+    status: req.body.status,
+  }
+
+  aprovados = aprovados.map(aprovado => {
+    if (Number(aprovado.id) === Number(aprovadoId)) {
+      aprovado = updatedAprovado
+    }
+    return aprovado
+  })
+
+  res.json("Status foi atualizada!")
+})
+app.route('/require/aprovados/:id').delete((req, res) => {
+  const aprovadoId = req.params.id
+
+  aprovados = aprovados.filter(aprovado => Number(aprovado.id) !== Number(aprovadoId))
+
+  res.json('Aprovação cancelada!')
+})
+
 
 app.route('/require/solicitations').get((req, res) => res.json({
   solicitations
@@ -4521,10 +4566,12 @@ app.route('/require/solicitations').post((req, res) => {
   const lastId = solicitations[solicitations.length - 1].id
   solicitations.push({
     id: lastId + 1,
-    date: dataAtual,
+    date: data,
+    userInfo: req.body.userInfo,
     nome: req.body.nome,
     cpf: req.body.cpf,
     service: req.body.service,
+    pasta: req.body.pasta,
     status: req.body.status
   })
   res.json('Solicitação enviada, aguarde a analise e fique de olho você será notificado aqui!')
@@ -4535,14 +4582,13 @@ app.route('/require/solicitations/:id').put((req, res) => {
   const solicitation = solicitations.find(solicitation => Number(solicitation.id) === Number(solicitationId))
 
   if (!solicitation) {
-    return res.json('Usuário não encontrado!')
+    return res.json('Solicitação não encontrada!')
   }
 
   const updatedSolicitation = {
     ...solicitation,
-    date: dataAtual,
+    date: data,
     status: req.body.status,
-
   }
 
   solicitations = solicitations.map(solicitation => {
@@ -4566,9 +4612,8 @@ app.route('/require/solicitations/:id').delete((req, res) => {
 app.route('/require/users').get((req, res) => res.json({
   users
 }))
-
 app.route('/require/users').post((req, res) => {
-  const lastId = users[users.length - 1].id
+  const lastId = users[users.length - 1]?.id
   users.push({
     id: lastId + 1,
     status: req.body.status,
@@ -4591,7 +4636,6 @@ app.route('/require/users').post((req, res) => {
   })
   res.json('Usuário cadastrado!')
 })
-
 app.route('/require/users/:id').put((req, res) => {
   const userId = req.params.id
 
@@ -4632,7 +4676,6 @@ app.route('/require/users/:id').put((req, res) => {
 
   res.json("Concluído!")
 })
-
 app.route('/require/users/:id').delete((req, res) => {
   const userId = req.params.id
 
@@ -4648,10 +4691,10 @@ app.route('/require/notices').get((req, res) => res.json({
 }))
 
 app.route('/require/notices').post((req, res) => {
-  const lastId = notices[notices.length - 1].id
+  const lastId = notices[notices.length - 1]?.id
   notices.push({
     id: lastId + 1,
-    date: dataAtual,
+    date: data,
     title: req.body.title,
     mensagem: req.body.mensagem
 
@@ -4670,7 +4713,7 @@ app.route('/require/notices/:id').put((req, res) => {
 
   const updatedNotice = {
     ...notice,
-    date: dataAtual,
+    date: data,
     title: req.body.title,
     mensagem: req.body.mensagem
   }
