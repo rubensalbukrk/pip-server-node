@@ -4617,7 +4617,6 @@ app.route('/require/users').post((req, res) => {
   users.push({
     id: lastId + 1,
     status: req.body.status,
-    isVolt: req.body.isVolt,
     isAutist: false,
     date: req.body.date,
     nome: req.body.nome,
@@ -4632,7 +4631,6 @@ app.route('/require/users').post((req, res) => {
     parentsName: req.body.parentsName,
     question1: req.body.question1,
     question2: req.body.question2,
-    requireService: [],
   })
   res.json('Usuário cadastrado!')
 })
@@ -4650,7 +4648,13 @@ app.route('/require/users/:id').put((req, res) => {
     isAutist: req.body.isAutist,
     isVolt: req.body.isVolt,
     isEtg: req.body.isEtg,
-    isCoord: req.body.isCoord,
+    isCoordMulher: req.body.isCoordMulher,
+    isCoordAutist: req.body.isCoordAutist,
+    isCoordSaude: req.body.isCoordSaude,
+    isCoordAlimentar: req.body.isCoordAlimentar,
+    isCoordPasse: req.body.isCoordPasse,
+    isCoordCidadania: req.body.isCoordCidadania,
+    isCoordProtagonista: req.body.isCoordProtagonista,
     status: req.body.status,
     nome: req.body.nome,
     idade: req.body.idade,
