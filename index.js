@@ -1,14 +1,31 @@
-const express = require('express')
 const cors = require('cors')
+const express = require('express')
+const multer = require('multer')
+const path = require('path')
 const app = express()
-
 const hoje = new Date()
 const data = hoje.getDate().toString().padStart(2,0) + "/" + String(hoje.getMonth() + 1).padStart(2,'0') + "/" + hoje.getFullYear() + ` as ` + hoje.toLocaleTimeString()
 
+const storage = multer.diskStorage({
+    destination: (req, file, callback) => {
+        callback(null, path.resolve('uploads'));
+    },
+    filename: (req, file, callback) => {
+        const time = new Date().getTime();
+
+        callback(null, `${file.originalname}`)
+    }
+})
+const upload = multer({ storage: storage });
 
 app.listen(5550, () => console.log('Rodando na porta 5550'))
 app.use(cors())
 app.use(express.json())
+app.use('/files', express.static('uploads'));
+
+app.post("/require/upload", upload.single("file"), (req, res) =>{
+  return res.json(req.file?.filename);
+});
 
 let notices = [
   {
