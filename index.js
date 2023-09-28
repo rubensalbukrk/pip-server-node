@@ -21,7 +21,7 @@ const upload = multer({ storage: storage });
 app.listen(5550, () => console.log('Rodando na porta 5550'))
 app.use(cors())
 app.use(express.json())
-app.use('/files', express.static('uploads'));
+app.use('/require/files', express.static('uploads'));
 
 app.post("/require/upload", upload.single("file"), (req, res) =>{
   return res.json(req.file?.filename);
@@ -4434,7 +4434,7 @@ let users = [
       date: '3/8/2023 23:30:08',
       nome: 'Rubens Developer',
       idade: 27,
-      avatar: "https://instagram.fjpa9-1.fna.fbcdn.net/v/t51.2885-19/363793891_247920134771958_5616203686962323957_n.jpg?stp=dst-jpg_s150x150&_nc_ht=instagram.fjpa9-1.fna.fbcdn.net&_nc_cat=106&_nc_ohc=NemjajHiLEoAX9nxfT8&edm=ACWDqb8BAAAA&ccb=7-5&oh=00_AfDdvUMLA3HnYwXzYz18lQPsJGsyGXG8Fn9q00JCDAPtdA&oe=650A32D1&_nc_sid=ee9879",
+      avatar: "",
       address: 'Bariloche Internation',
       phone: "83 992211144",
       cpf: "111.111.111-11",
@@ -4676,6 +4676,7 @@ app.route('/require/users/:id').put((req, res) => {
     nome: req.body.nome,
     idade: req.body.idade,
     address: req.body.address,
+    avatar: req.body.avatar,
     phone: req.body.phone,
     cpf: req.body.cpf,
     nis: req.body.nis,
