@@ -4431,26 +4431,27 @@ let users = [
       id: 272,
       isAdmin: true,
       status: true,
-      date: '3/8/2023 23:30:08',
-      nome: 'Rubens Developer',
+      date: data,
+      nome: 'Rubens Albuquerque',
       idade: 27,
       avatar: "",
       address: 'Bariloche Internation',
+      bairro: "Municípios",
       phone: "83 992211144",
       cpf: "111.111.111-11",
       nis: "01020304051",
       email: "rubiinho@live.it",
       password: "123456",
-      parentsName: [
+      filhos: [
         {
           id: 1,
-          name: "Rafael",
+          nome: "Rafael",
           idade: 4,
           cpf: "021.556.234-00"
         },
         {
           id: 2,
-          name: "Miguel",
+          nome: "Miguel",
           idade: 2,
           cpf: "312.563.333-00"
         }
@@ -4629,6 +4630,19 @@ app.route('/require/solicitations/:id').delete((req, res) => {
 app.route('/require/users').get((req, res) => res.json({
   users
 }))
+
+app.route('/require/users/:id').get((req, res) => {
+  const userId = req.params.id
+
+  const user = users.find(user => Number(user.id) === Number(userId))
+
+  if (!user) {
+    return res.json('Usuário não encontrado!')
+  }
+
+  res.json(user)
+})
+
 app.route('/require/users').post((req, res) => {
   const lastId = users[users.length - 1]?.id
   users.push({
@@ -4639,6 +4653,7 @@ app.route('/require/users').post((req, res) => {
     nome: req.body.nome,
     idade: req.body.idade,
     address: req.body.address,
+    bairro: req.body.bairro,
     phone: req.body.phone,
     cpf: req.body.cpf,
     nis: req.body.nis,
@@ -4676,6 +4691,7 @@ app.route('/require/users/:id').put((req, res) => {
     nome: req.body.nome,
     idade: req.body.idade,
     address: req.body.address,
+    bairro: req.body.bairro,
     avatar: req.body.avatar,
     phone: req.body.phone,
     cpf: req.body.cpf,
@@ -4718,6 +4734,7 @@ app.route('/require/notices').post((req, res) => {
     id: lastId + 1,
     date: data,
     title: req.body.title,
+    img: req.body.img,
     mensagem: req.body.mensagem
 
   })
