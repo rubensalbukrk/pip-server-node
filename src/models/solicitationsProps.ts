@@ -1,8 +1,9 @@
-import { AprovadoProps } from "./aprovados";
+import { AprovadoProps } from "./aprovadosProps";
 
 interface SolicitationsProps extends AprovadoProps {
+    id: number
     pasta: string
-    userInfo: object[]
+    userInfo?: object[]
 }
 
 export {SolicitationsProps}

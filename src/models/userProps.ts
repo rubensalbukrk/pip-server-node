@@ -1,9 +1,16 @@
 interface UserProps {
-    id: number
-    isAdmin?: boolean
+    id: number 
     status: boolean
+    isAdmin?: boolean
     isAutist?: boolean
     isVolt?: boolean
+    isCoordAutist?: boolean
+    isCoordMulher?: boolean
+    isCoordSaude?: boolean
+    isCoordProtagonista?: boolean
+    isCoordAlimentar?: boolean
+    isCoordPasse?: boolean
+    isCoordCidadania?: boolean
     date: string
     avatar?: string
     nome: string
@@ -11,9 +18,9 @@ interface UserProps {
     address: string
     bairro: string
     phone: number
-    cpf: number
+    cpf: string
     nis: number
-    filhos?: Array<{name: string, cpf: number, idade: number}>
+    filhos?: object[]
     email: string,
     password: string
     question1?: boolean
