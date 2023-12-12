@@ -1,5 +1,5 @@
 import express from 'express';
-import { SolicitationsProps } from '../models/solicitationsProps';
+import { SolicitationsProps } from '../interfaces/solicitationsProps';
 import data from '../utils/data';
 
 const router = express.Router()
@@ -17,7 +17,7 @@ let solicitations: SolicitationsProps[] = [
   ];
 
 router.get('/', (req, res) => res.json({
-    solicitations
+    results: {solicitations}
   }))
 router.post('/', (req, res) => {
     const lastId = solicitations[solicitations.length - 1]?.id

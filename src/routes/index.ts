@@ -3,10 +3,11 @@ import notices from './notices'
 import users from './users'
 import solicitations from './solicitations'
 import aprovados from './aprovados'
+import { MessageResponse } from './../interfaces/messageResponse';
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
+router.get<{}, MessageResponse>('/', (req, res) => {
     res.json({
         message: "Bem vindo ao nosso sistema 👋🌎"
     })

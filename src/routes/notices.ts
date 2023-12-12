@@ -1,6 +1,6 @@
 import express from 'express';
 import data from '../utils/data'
-import { NoticeProps } from '../models/noticesProps';
+import { NoticeProps } from '../interfaces/noticesProps';
 
 const router = express.Router();
 
@@ -22,7 +22,7 @@ let notices: NoticeProps[] = [
   ]
 
 router.get('/', (req, res) => res.json({
-    notices
+    results: {notices}
   }))
   
 router.post('/', (req, res) => {

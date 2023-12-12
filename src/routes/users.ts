@@ -1,6 +1,6 @@
 import express from 'express';
 import data from '../utils/data'
-import { UserProps } from '../models/userProps';
+import { UserProps } from '../interfaces/userProps';
 
 const router = express.Router()
 
@@ -89,7 +89,9 @@ let users: UserProps[] = [
       },
 ];
 
-router.get('/', (req, res) => res.json({users}))
+router.get('/', (req, res) => res.json({
+  results: users
+}))
 router.get('/:id', (req, res) => {
   const userId = req.params.id
 
