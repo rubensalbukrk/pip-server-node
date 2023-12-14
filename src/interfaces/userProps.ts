@@ -1,3 +1,11 @@
+interface FilhosProps {
+    id: number
+    nome: string
+    cpf: string
+    idade: number
+    isAutist: boolean
+}
+
 interface UserProps {
     id: number 
     status: boolean
@@ -20,7 +28,7 @@ interface UserProps {
     phone: number
     cpf: string
     nis: number
-    filhos?: object[]
+    filhos?: FilhosProps[]
     email: string,
     password: string
     question1?: boolean
