@@ -6,7 +6,7 @@ import { userValidation } from '../validations/user.validation';
 
 const router = express.Router()
 
-let users: UserProps[] = [
+export let users: UserProps[] = [
     {
         id: 1,
         isAdmin: true,

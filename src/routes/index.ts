@@ -1,3 +1,4 @@
+import { authenticate } from './../controllers/auth.controller';
 import express from 'express'
 import notices from './notices'
 import users from './users'
@@ -17,5 +18,6 @@ router.use('/notices', notices)
 router.use('/users', users)
 router.use('/solicitations', solicitations)
 router.use('/aprovados', aprovados)
+router.use('/login', authenticate)
 
 export default router;
