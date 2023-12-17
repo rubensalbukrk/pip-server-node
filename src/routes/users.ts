@@ -1,7 +1,8 @@
 import express from 'express';
 import data from '../utils/data'
-import { UserProps } from '../interfaces/userProps';
 import bcrypt from 'bcrypt'
+import { UserProps } from '../interfaces/userProps';
+import { userValidation } from '../validations/user.validation';
 
 const router = express.Router()
 
@@ -108,31 +109,37 @@ router.get('/:id', (req, res) => {
   res.json(user)
 })
 router.post('/', async (req, res) => {
-  const lastId = users[users.length - 1]?.id
-  const hashPass: String = await bcrypt.hash(req.body.password, 8);
-  req.body.password = hashPass
-  users.push({
-    id: lastId + 1,
-    status: req.body.status,
-    isAutist: false,
-    isVolt: req.body.isVolt,
-    isAdmin: req.body.isAdmin,
-    date: data,
-    avatar: req.body.avatar,
-    nome: req.body.nome,
-    idade: req.body.idade,
-    address: req.body.address,
-    bairro: req.body.bairro,
-    phone: req.body.phone,
-    cpf: req.body.cpf,
-    nis: req.body.nis,
-    filhos: req.body.filhos,
-    email: req.body.email,
-    password: req.body.password,
-    question1: req.body.question1,
-    question2: req.body.question2,
-  })
-  res.json('Usuário cadastrado!')
+  try {
+    await userValidation.validate(req.body)
+    
+    const lastId = users[users.length - 1]?.id
+    const hashPass: String = await bcrypt.hash(req.body.password, 8);
+    req.body.password = hashPass
+    users.push({
+      id: lastId + 1,
+      status: req.body.status,
+      isAutist: false,
+      isVolt: req.body.isVolt,
+      isAdmin: req.body.isAdmin,
+      date: data,
+      avatar: req.body.avatar,
+      nome: req.body.nome,
+      idade: req.body.idade,
+      address: req.body.address,
+      bairro: req.body.bairro,
+      phone: req.body.phone,
+      cpf: req.body.cpf,
+      nis: req.body.nis,
+      filhos: req.body.filhos,
+      email: req.body.email,
+      password: req.body.password,
+      question1: req.body.question1,
+      question2: req.body.question2,
+    })
+    res.status(200).send(req.body)
+  } catch (e) {
+    res.status(400).send(e)
+  }  
 })
 router.put('/:id', (req, res) => {
   const userId = req.params.id
