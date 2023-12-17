@@ -1,5 +1,6 @@
 import express from 'express';
 import { SolicitationsProps } from '../interfaces/solicitationsProps';
+import { UserProps } from '../interfaces/userProps';
 import data from '../utils/data';
 
 const router = express.Router()
@@ -12,7 +13,35 @@ let solicitations: SolicitationsProps[] = [
       nome: "Rubens",
       pasta: "Cidadania",
       service: "Emitir RG",
-      status: "Em avaliação"
+      status: "Em avaliação",
+      userInfo: {
+        id: 1,
+        isAdmin: true,
+        isAutist: false,
+        isVolt: false,
+        status: true,
+        date: data,
+        nome: "Rubens Albuquerque",
+        idade: 27,
+        address: "Bariloche Internation",
+        bairro: "Santa Rita",
+        phone: 839867711,
+        cpf: "111.111.111-11",
+        nis: 2321051,
+        email: "rubiinho@live.it",
+        password: "123456",
+        filhos: [
+          {
+            id: 1,
+            nome: 'Rafael Santos',
+            idade: 4,
+            cpf: "215.562.340-10",
+            isAutist: true,
+          },
+          ],
+        question1: true,
+        question2: "Todos focados pela comunidade!"
+      }
     }
   ];
 

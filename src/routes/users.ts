@@ -1,6 +1,7 @@
 import express from 'express';
 import data from '../utils/data'
 import { UserProps } from '../interfaces/userProps';
+import bcrypt from 'bcrypt'
 
 const router = express.Router()
 
@@ -24,9 +25,10 @@ let users: UserProps[] = [
         filhos: [
           {
             id: 1,
-            name: 'Rafael Santos',
+            nome: 'Rafael Santos',
             idade: 4,
-            cpf: "215.562.340-10"
+            cpf: "215.562.340-10",
+            isAutist: true,
           },
           ],
         question1: true,
@@ -51,9 +53,10 @@ let users: UserProps[] = [
         filhos: [
           {
             id: 1,
-            name: "Rafael",
+            nome: "Rafael",
             idade: 4,
-            cpf: "215.562.340-10"
+            cpf: "215.562.340-10",
+            isAutist: true
           },
         ],
         question1: true,
@@ -79,9 +82,10 @@ let users: UserProps[] = [
         filhos: [
           {
             id: 1,
-            name: "Rafael",
+            nome: "Rafael",
             idade: 4,
-            cpf: "215.562.340-10"
+            cpf: "215.562.340-10",
+            isAutist: true
           },
         ],
         question1: true,
@@ -103,8 +107,10 @@ router.get('/:id', (req, res) => {
 
   res.json(user)
 })
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const lastId = users[users.length - 1]?.id
+  const hashPass: String = await bcrypt.hash(req.body.password, 8);
+  req.body.password = hashPass
   users.push({
     id: lastId + 1,
     status: req.body.status,
