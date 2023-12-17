@@ -1,6 +1,7 @@
 import express from 'express';
 import data from '../utils/data'
 import { NoticeProps } from '../interfaces/noticesProps';
+import { verifyToken } from '../middlewares/auth';
 
 const router = express.Router();
 
@@ -21,11 +22,11 @@ let notices: NoticeProps[] = [
     },
   ]
 
-router.get('/', (req, res) => res.json({
+router.get('/', verifyToken, (req, res) => res.json({
     results: {notices}
   }))
   
-router.post('/', (req, res) => {
+router.post('/', verifyToken, (req, res) => {
     const lastId = notices[notices.length - 1]?.id
     notices.push({
       id: lastId + 1,
@@ -38,7 +39,7 @@ router.post('/', (req, res) => {
     res.json('Notícia adicionada!')
   })
   
-router.put('/:id', (req, res) => {
+router.put('/:id', verifyToken, (req, res) => {
     const noticeId = req.params.id
     const notice = notices.find(user => Number(user.id) === Number(noticeId))
   
@@ -61,7 +62,7 @@ router.put('/:id', (req, res) => {
     res.json("Notícia atualizada!")
   })
   
-router.delete('/:id', (req, res) => {
+router.delete('/:id', verifyToken, (req, res) => {
     const noticeId = req.params.id
     notices = notices.filter(notice => Number(notice.id) !== Number(noticeId))
     res.json('Notícia deletada!')

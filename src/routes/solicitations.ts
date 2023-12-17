@@ -1,7 +1,8 @@
+import data from '../utils/data';
 import express from 'express';
 import { SolicitationsProps } from '../interfaces/solicitationsProps';
 import { UserProps } from '../interfaces/userProps';
-import data from '../utils/data';
+import { verifyToken } from './../middlewares/auth';
 
 const router = express.Router()
 
@@ -45,10 +46,10 @@ let solicitations: SolicitationsProps[] = [
     }
   ];
 
-router.get('/', (req, res) => res.json({
+router.get('/', verifyToken, (req, res) => res.json({
     results: {solicitations}
   }))
-router.post('/', (req, res) => {
+router.post('/', verifyToken, (req, res) => {
     const lastId = solicitations[solicitations.length - 1]?.id
     solicitations.push({
       id: lastId + 1,
@@ -62,7 +63,7 @@ router.post('/', (req, res) => {
     })
     res.json('Solicitação enviada, aguarde a analise e fique de olho você será notificado aqui!')
   })
-router.put('/:id', (req, res) => {
+router.put('/:id', verifyToken, (req, res) => {
     const solicitationId = req.params.id
   
     const solicitation = solicitations.find(solicitation => Number(solicitation.id) === Number(solicitationId))
@@ -86,7 +87,7 @@ router.put('/:id', (req, res) => {
   
     res.json("A solicitação foi atualizada!")
   })
-router.delete('/:id', (req, res) => {
+router.delete('/:id', verifyToken, (req, res) => {
     const solicitationId = req.params.id
   
     solicitations = solicitations.filter(solicitation => Number(solicitation.id) !== Number(solicitationId))

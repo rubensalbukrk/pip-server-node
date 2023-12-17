@@ -1,10 +1,11 @@
+import { MessageResponse } from './../interfaces/messageResponse';
+import { verifyToken } from './../middlewares/auth';
 import { authenticate } from './../controllers/auth.controller';
 import express from 'express'
 import notices from './notices'
 import users from './users'
 import solicitations from './solicitations'
 import aprovados from './aprovados'
-import { MessageResponse } from './../interfaces/messageResponse';
 
 const router = express.Router()
 

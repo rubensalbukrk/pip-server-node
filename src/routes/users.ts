@@ -1,3 +1,4 @@
+import { verifyToken } from './../middlewares/auth';
 import express from 'express';
 import data from '../utils/data'
 import bcrypt from 'bcrypt'
@@ -94,10 +95,10 @@ export let users: UserProps[] = [
       },
 ];
 
-router.get('/', (req, res) => res.json({
+router.get('/', verifyToken, (req, res) => res.json({
   results: users
 }))
-router.get('/:id', (req, res) => {
+router.get('/:id', verifyToken, (req, res) => {
   const userId = req.params.id
 
   const user = users.find(user => Number(user.id) === Number(userId))
@@ -141,7 +142,7 @@ router.post('/', async (req, res) => {
     res.status(400).send(e)
   }  
 })
-router.put('/:id', (req, res) => {
+router.put('/:id', verifyToken, (req, res) => {
   const userId = req.params.id
 
   const user = users.find(user => Number(user.id) === Number(userId))
@@ -189,7 +190,7 @@ router.put('/:id', (req, res) => {
 
   res.json("Usuário atualizado com sucesso!")
 })
-router.delete('/:id', (req, res) => {
+router.delete('/:id', verifyToken, (req, res) => {
   const userId = req.params.id
 
   users = users.filter(user => Number(user.id) !== Number(userId))

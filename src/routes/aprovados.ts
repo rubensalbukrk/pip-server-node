@@ -1,7 +1,8 @@
-
-import express from 'express';
 import data from '../utils/data';
+import express from 'express';
 import { AprovadosProps } from './../interfaces/aprovadosProps';
+import { verifyToken } from './../middlewares/auth';
+
 
 const router = express.Router()
 
@@ -16,10 +17,10 @@ export let aprovados: AprovadosProps[] = [
     }
 ]
 
-router.get('/', (req, res) => res.json({
+router.get('/', verifyToken, (req, res) => res.json({
     results: {aprovados}
 }))
-router.post('/', (req, res) => {
+router.post('/', verifyToken, (req, res) => {
     const lastId = aprovados[aprovados.length - 1]?.id
 
     aprovados.push({
@@ -33,7 +34,7 @@ router.post('/', (req, res) => {
     res.json('Aprovado com sucesso!')
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', verifyToken, (req, res) => {
     const aprovadoId = req.params.id
     const aprovado = aprovados.find(aprovado => Number(aprovado.id) === Number(aprovadoId))
 
@@ -56,7 +57,7 @@ router.put('/:id', (req, res) => {
     res.json('Status atualizado com sucesso!')
 } )
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', verifyToken, (req, res) => {
     const aprovadoId = req.params.id
 
     aprovados = aprovados.filter(aprovado => Number(aprovado.id) !== Number(aprovadoId))
