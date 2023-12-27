@@ -8,9 +8,8 @@ import {create, get, remove, update} from '../controllers/user.controller'
 
 const router = express.Router()
 
-
-  router.get("/", get)
   router.post("/", create)
+  router.get("/", get)
   router.put("/:id", verifyToken, update)
   router.delete("/:id", verifyToken, remove)
 
