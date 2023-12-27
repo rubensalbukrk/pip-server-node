@@ -22,7 +22,6 @@ export const authenticate = async (req: Request, res: Response, next: any) => {
         const token = jwt.sign(
             {
                 id: user.id, 
-                status: user.status,
                 isAdmin: user.isAdmin,
                 isAutist: user.isAutist,
                 isVolt: user.isVolt,
