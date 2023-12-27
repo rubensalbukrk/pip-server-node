@@ -29,8 +29,8 @@ model User {
   isCoordCidadania Boolean?
   avatar String?
   nome String
-  idade String
-  phone String?
+  idade BigInt?
+  phone BigInt?
   address String
   bairro String
   cpf String
