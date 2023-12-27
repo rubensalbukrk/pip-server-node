@@ -38,7 +38,7 @@ model User {
   cpf String
   nis Int?
   email String
-  filhos Json[]
+  filhos String?
   password String
   question1 Boolean?
   question2 String?
