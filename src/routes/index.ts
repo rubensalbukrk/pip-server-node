@@ -1,5 +1,4 @@
 import { MessageResponse } from './../interfaces/messageResponse';
-import { verifyToken } from './../middlewares/auth';
 import { authenticate } from './../controllers/auth.controller';
 import express from 'express'
 import notices from './notices'

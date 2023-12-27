@@ -22,7 +22,7 @@ let notices: NoticeProps[] = [
     },
   ]
 
-router.get('/', verifyToken, (req, res) => res.json({
+router.get('/', (req, res) => res.json({
     results: {notices}
   }))
   

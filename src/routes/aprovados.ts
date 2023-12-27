@@ -17,7 +17,7 @@ export let aprovados: AprovadosProps[] = [
     }
 ]
 
-router.get('/', verifyToken, (req, res) => res.json({
+router.get('/', (req, res) => res.json({
     results: {aprovados}
 }))
 router.post('/', verifyToken, (req, res) => {

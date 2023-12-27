@@ -1,22 +1,21 @@
 import jwt from 'jsonwebtoken'
 import { Request, Response} from 'express'
-import { users } from '../routes/users'
+import { _findUser } from '../repositorys/user-repository'
 import bcrypt from 'bcrypt'
+import { UserProps } from '../interfaces/userProps'
 
-export const authenticate = (req: Request, res: Response, next: any) => {
-
+export const authenticate = async (req: Request, res: Response, next: any) => {
    try {
     const {cpf, password} = req.body
+    const user = await _findUser(cpf, password)
 
     if(!(cpf && password)){
         res.status(400).send('Email e senha são obrigatórios!')
     }
-
-    const user = users.find(item => item.cpf === cpf)
    
     if(!user){
         res.status(401)
-        .send({message: `Email e/ou senha inválidos!`})
+        .send('Email e/ou senha inválidos!')
     }
     
     if(user && bcrypt.compareSync(password, user.password)){
@@ -34,15 +33,15 @@ export const authenticate = (req: Request, res: Response, next: any) => {
                 isCoordAlimentar: user.isCoordAlimentar,
                 isCoordPasse: user.isCoordPasse,
                 isCoordCidadania: user.isCoordCidadania,
-                date: user.date,
                 nome: user.nome,
                 idade: user.idade,
                 address: user.address,
                 bairro: user.bairro,
                 phone: user.phone,
+                avatar: user.avatar,
                 cpf: user.cpf,
                 nis: user.nis,
-                filhoss: user.filhos,
+                filhos: user.filhos,
                 email: user.email,
                 question1: user.question1,
                 question2: user.question2,
@@ -52,7 +51,8 @@ export const authenticate = (req: Request, res: Response, next: any) => {
                 expiresIn: "3hr"
             }
         )
-        res.status(200).send({token})
+        const decodedUser = jwt.decode(token)
+        res.status(200).send({token: token, user: decodedUser})
     }else {
         res.status(401).send(`CPF e/ou senha inválidos!`)
     }

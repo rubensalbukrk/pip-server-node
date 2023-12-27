@@ -12,5 +12,4 @@ export const userValidation = yup.object({
     nis: required,
     email: required,
     password: required,
-    question2: required,
 })

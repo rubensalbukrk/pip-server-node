@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model Filhos {
+  id       Int     @id @default(autoincrement())
+  nome     String
+  cpf      String
+  idade    Int
+  isAutist Boolean
+  isPcd    Boolean
+}
+
+model User {
+  id                  Int      @id @default(autoincrement())
+  status              Boolean?
+  isAdmin             Boolean?
+  isAutist            Boolean?
+  isVolt              Boolean?
+  isCoordAutist       Boolean?
+  isCoordMulher       Boolean?
+  isCoordSaude        Boolean?
+  isCoordProtagonista Boolean?
+  isCoordAlimentar    Boolean?
+  isCoordPasse        Boolean?
+  isCoordCidadania    Boolean?
+  avatar              String?
+  nome                String
+  idade               Int
+  address             String
+  bairro              String
+  phone               Int
+  cpf                 String
+  nis                 Int?
+  email               String
+  password            String
+  question1           Boolean?
+  question2           String?
+  createAt            DateTime @default(now())
+  filhos              String[]
+}
+
+model Solicitations {
+  id       Int      @id @default(autoincrement())
+  nome     String
+  cpf      String
+  service  String
+  status   String
+  pasta    String
+  userInfo String[]
+  createAt DateTime @default(now())
+  updateAt DateTime @default(now())
+}
+
+model Aprovados {
+  id       Int      @id @default(autoincrement())
+  date     String
+  nome     String
+  cpf      String
+  service  String
+  status   String
+  createAt DateTime @default(now())
+}
+
+model Notices {
+  id       Int      @id @default(autoincrement())
+  date     String
+  title    String
+  mensagem String
+  img      String
+  createAt DateTime @default(now())
+  updateAt DateTime @default(now())
+}

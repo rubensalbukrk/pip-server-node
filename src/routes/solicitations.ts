@@ -46,7 +46,7 @@ let solicitations: SolicitationsProps[] = [
     }
   ];
 
-router.get('/', verifyToken, (req, res) => res.json({
+router.get('/', (req, res) => res.json({
     results: {solicitations}
   }))
 router.post('/', verifyToken, (req, res) => {
