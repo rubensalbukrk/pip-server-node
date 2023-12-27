@@ -5,6 +5,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url = env("POSTGRES_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model Filhos {
@@ -20,7 +21,7 @@ model User {
   id Int @id @default(autoincrement())
   status Boolean?
   isAdmin Boolean?
-  isAutist  Boolean?
+  isAutist Boolean?
   isVolt Boolean?
   isCoordAutist Boolean?
   isCoordMulher Boolean?
