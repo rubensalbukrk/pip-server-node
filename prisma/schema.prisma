@@ -34,7 +34,7 @@ model User {
   idade Int
   address String
   bairro String
-  phone Int
+  phone Int?
   cpf String
   nis Int?
   email String
