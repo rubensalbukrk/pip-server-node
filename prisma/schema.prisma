@@ -41,7 +41,6 @@ model User {
   question1 Boolean?
   question2 String?
   createAt DateTime @default(now())
-  updateAt DateTime @default(now())
 }
 
 model Solicitations {
