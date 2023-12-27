@@ -29,12 +29,12 @@ model User {
   isCoordCidadania Boolean?
   avatar String?
   nome String
-  idade String?
-  phone String?
+  idade String
+  phone String
   address String
   bairro String
   cpf String
-  nis String?
+  nis String
   email String
   filhos String?
   password String
