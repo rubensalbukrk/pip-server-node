@@ -23,7 +23,6 @@ export const authenticate = async (req: Request, res: Response, next: any) => {
             {
                 id: user.id, 
                 isAdmin: user.isAdmin,
-                isAutist: user.isAutist,
                 isVolt: user.isVolt,
                 isCoordAutist: user.isCoordAutist,
                 isCoordMulher: user.isCoordMulher,
