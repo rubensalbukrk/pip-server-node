@@ -30,7 +30,7 @@ model User {
   avatar String?
   nome String
   idade String
-  phone String
+  phone String?
   address String
   bairro String
   cpf String
