@@ -31,7 +31,7 @@ CREATE TABLE "User" (
     "cpf" TEXT NOT NULL,
     "nis" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "filhos" TEXT,
+    "filhos" TEXT[],
     "password" TEXT NOT NULL,
     "question1" BOOLEAN,
     "question2" TEXT,
