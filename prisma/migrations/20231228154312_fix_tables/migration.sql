@@ -1,16 +1,4 @@
 -- CreateTable
-CREATE TABLE "Filhos" (
-    "id" SERIAL NOT NULL,
-    "nome" TEXT NOT NULL,
-    "cpf" TEXT NOT NULL,
-    "idade" INTEGER NOT NULL,
-    "isAutist" BOOLEAN NOT NULL,
-    "isPcd" BOOLEAN NOT NULL,
-
-    CONSTRAINT "Filhos_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "isAdmin" BOOLEAN,
@@ -31,13 +19,26 @@ CREATE TABLE "User" (
     "cpf" TEXT NOT NULL,
     "nis" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "filhos" TEXT[],
     "password" TEXT NOT NULL,
     "question1" BOOLEAN,
     "question2" TEXT,
     "createAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "solicitationsId" INTEGER,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Filho" (
+    "id" SERIAL NOT NULL,
+    "nome" TEXT NOT NULL,
+    "cpf" TEXT NOT NULL,
+    "idade" INTEGER NOT NULL,
+    "isAutist" BOOLEAN NOT NULL,
+    "isPcd" BOOLEAN NOT NULL,
+    "userId" INTEGER,
+
+    CONSTRAINT "Filho_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -48,7 +49,6 @@ CREATE TABLE "Solicitations" (
     "service" TEXT NOT NULL,
     "status" TEXT NOT NULL,
     "pasta" TEXT NOT NULL,
-    "userInfo" TEXT[],
     "createAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updateAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -80,3 +80,9 @@ CREATE TABLE "Notices" (
 
     CONSTRAINT "Notices_pkey" PRIMARY KEY ("id")
 );
+
+-- AddForeignKey
+ALTER TABLE "User" ADD CONSTRAINT "User_solicitationsId_fkey" FOREIGN KEY ("solicitationsId") REFERENCES "Solicitations"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Filho" ADD CONSTRAINT "Filho_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;

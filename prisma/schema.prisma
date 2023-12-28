@@ -4,43 +4,47 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = env("POSTGRES_URL") // uses connection pooling
+  url      = env("POSTGRES_URL") // uses connection pooling
 }
 
-model Filhos {
+model User {
+  id                  Int            @id @default(autoincrement())
+  isAdmin             Boolean?
+  isVolt              Boolean?
+  isCoordAutist       Boolean?
+  isCoordMulher       Boolean?
+  isCoordSaude        Boolean?
+  isCoordProtagonista Boolean?
+  isCoordAlimentar    Boolean?
+  isCoordPasse        Boolean?
+  isCoordCidadania    Boolean?
+  avatar              String?
+  nome                String
+  idade               String
+  phone               String
+  address             String
+  bairro              String
+  cpf                 String
+  nis                 String
+  email               String
+  filhos              Filho[]
+  password            String
+  question1           Boolean?
+  question2           String?
+  createAt            DateTime       @default(now())
+  Solicitations       Solicitations? @relation(fields: [solicitationsId], references: [id])
+  solicitationsId     Int?
+}
+
+model Filho {
   id       Int     @id @default(autoincrement())
   nome     String
   cpf      String
   idade    Int
   isAutist Boolean
   isPcd    Boolean
-}
-
-model User {
-  id Int @id @default(autoincrement())
-  isAdmin Boolean?
-  isVolt Boolean?
-  isCoordAutist Boolean?
-  isCoordMulher Boolean?
-  isCoordSaude Boolean?
-  isCoordProtagonista Boolean?
-  isCoordAlimentar Boolean?
-  isCoordPasse Boolean?
-  isCoordCidadania Boolean?
-  avatar String?
-  nome String
-  idade String
-  phone String
-  address String
-  bairro String
-  cpf String
-  nis String
-  email String
-  filhos String[]
-  password String
-  question1 Boolean?
-  question2 String?
-  createAt DateTime @default(now())
+  User     User?   @relation(fields: [userId], references: [id])
+  userId   Int?
 }
 
 model Solicitations {
@@ -50,7 +54,7 @@ model Solicitations {
   service  String
   status   String
   pasta    String
-  userInfo String[]
+  userInfo User[]
   createAt DateTime @default(now())
   updateAt DateTime @default(now())
 }
