@@ -29,7 +29,7 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
-CREATE TABLE "Filho" (
+CREATE TABLE "Parentes" (
     "id" SERIAL NOT NULL,
     "nome" TEXT NOT NULL,
     "cpf" TEXT NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE "Filho" (
     "isPcd" BOOLEAN NOT NULL,
     "userId" INTEGER,
 
-    CONSTRAINT "Filho_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Parentes_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -85,4 +85,4 @@ CREATE TABLE "Notices" (
 ALTER TABLE "User" ADD CONSTRAINT "User_solicitationsId_fkey" FOREIGN KEY ("solicitationsId") REFERENCES "Solicitations"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Filho" ADD CONSTRAINT "Filho_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Parentes" ADD CONSTRAINT "Parentes_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;

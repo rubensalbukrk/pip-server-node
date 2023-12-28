@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken'
 import { Request, Response} from 'express'
 import { _findUser } from '../repositorys/user-repository'
 import bcrypt from 'bcrypt'
-import { UserProps } from '../interfaces/userProps'
 
 export const authenticate = async (req: Request, res: Response, next: any) => {
    try {
@@ -39,10 +38,10 @@ export const authenticate = async (req: Request, res: Response, next: any) => {
                 avatar: user.avatar,
                 cpf: user.cpf,
                 nis: user?.nis,
-                filhos: user?.filhos,
                 email: user.email,
                 question1: user.question1,
                 question2: user.question2,
+                parents: user.parents
             },
             String(process.env.TOKEN_KEY),
             {

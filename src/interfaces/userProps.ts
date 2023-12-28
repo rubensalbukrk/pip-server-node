@@ -4,6 +4,7 @@ interface FilhosProps {
     cpf: string
     idade: number
     isAutist: boolean
+    isPcd: boolean
 }
 
 interface UserProps {
@@ -28,7 +29,7 @@ interface UserProps {
     phone: number
     cpf: string
     nis: number
-    filhos?: FilhosProps[]
+    parents: FilhosProps[]
     email: string,
     password: string
     question1?: boolean

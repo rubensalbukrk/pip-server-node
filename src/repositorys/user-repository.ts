@@ -17,6 +17,31 @@ export const _findUser = async (cpf: string, password: string) => {
         where: {
             cpf: cpf,
             password: password
+        },
+        select: {
+                id: true,
+                isAdmin: true,
+                isVolt: true,
+                isCoordAutist: true,
+                isCoordMulher: true,
+                isCoordSaude: true,
+                isCoordProtagonista: true,
+                isCoordAlimentar: true,
+                isCoordPasse: true,
+                isCoordCidadania: true,
+                nome:true,
+                idade: true,
+                address: true,
+                bairro: true,
+                phone: true,
+                avatar: true,
+                cpf: true,
+                nis: true,
+                email: true,
+                password: true,
+                question1: true,
+                question2: true,
+                parents: true
         }
     })
     return user

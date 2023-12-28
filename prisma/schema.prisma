@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("POSTGRES_URL") // uses connection pooling
+  url      = env("POSTGRES_URL")
 }
 
 model User {
@@ -27,24 +27,24 @@ model User {
   cpf                 String
   nis                 String
   email               String
-  filhos              Filho[]
   password            String
   question1           Boolean?
   question2           String?
   createAt            DateTime       @default(now())
-  Solicitations       Solicitations? @relation(fields: [solicitationsId], references: [id])
   solicitationsId     Int?
+  parents             Parentes[]
+  Solicitations       Solicitations? @relation(fields: [solicitationsId], references: [id])
 }
 
-model Filho {
+model Parentes {
   id       Int     @id @default(autoincrement())
   nome     String
   cpf      String
   idade    Int
   isAutist Boolean
   isPcd    Boolean
-  User     User?   @relation(fields: [userId], references: [id])
   userId   Int?
+  User     User?   @relation(fields: [userId], references: [id])
 }
 
 model Solicitations {
@@ -54,9 +54,9 @@ model Solicitations {
   service  String
   status   String
   pasta    String
-  userInfo User[]
   createAt DateTime @default(now())
   updateAt DateTime @default(now())
+  userInfo User[]
 }
 
 model Aprovados {
