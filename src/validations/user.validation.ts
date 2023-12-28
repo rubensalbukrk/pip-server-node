@@ -9,7 +9,6 @@ export const userValidation = yup.object({
     bairro: required,
     phone: required,
     cpf: required,
-    nis: required,
     email: required,
     password: required,
 })

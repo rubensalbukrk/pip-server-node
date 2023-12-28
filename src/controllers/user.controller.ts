@@ -1,5 +1,7 @@
+import { userValidation } from './../validations/user.validation';
 import express, {Response, Request} from 'express'
 import { _getUsers, _createUser, _removeUser,_updateUser  } from '../repositorys/user-repository'
+import bcrypt from 'bcrypt'
 
 export const get = async (req: Request, res: Response) => {
     try {
@@ -12,7 +14,11 @@ export const get = async (req: Request, res: Response) => {
 
 export const create = async (req: Request, res: Response) => {
     try {
-        const user = await _createUser(req.body)
+        await userValidation.validate(req.body)
+        const hashPass: String = await bcrypt.hash(req.body.password, 8);
+        req.body.password = hashPass
+        const {parents} = req.body
+        const user = await _createUser(req.body, parents)
         res.status(200).send(user)
     } catch (e) {
         res.status(400).send(`Problema ao criar usuário: ${e}`)

@@ -1,9 +1,27 @@
 import { prisma } from './../services/prisma';
-import { User } from "@prisma/client";
+import { Parente, User } from "@prisma/client";
 
-export const _createUser = async (data: User) => {
+export const _createUser = async (data: User, parents: Parente) => {
     const user = await prisma.user.create({
-        data
+        data: {
+            nome: data.nome,
+            idade: data.idade,
+            cpf: data.cpf,
+            address: data.address,
+            nis: data.nis,
+            phone: data.phone,
+            email: data.email,
+            bairro: data.bairro,
+            password: data.password,
+            parents: {
+                createMany: {
+                    data: parents
+                }
+            }
+        },
+        include: {
+            parents: true
+        }
     })
     return user
 }

@@ -1,10 +1,10 @@
 import { verifyToken } from './../middlewares/auth';
 import express from 'express';
-import bcrypt from 'bcrypt'
-import { userValidation } from '../validations/user.validation';
 import {create, get, remove, update} from '../controllers/user.controller'
+import bodyParser from 'body-parser';
 
 const router = express.Router()
+router.use(bodyParser.json());
 
   router.post("/", create)
   router.get("/", get)
