@@ -4,6 +4,7 @@ import { Parente, User } from "@prisma/client";
 export const _createUser = async (data: User, parents: Parente) => {
     const user = await prisma.user.create({
         data: {
+            isAdmin: data.isAdmin,
             nome: data.nome,
             idade: data.idade,
             cpf: data.cpf,
