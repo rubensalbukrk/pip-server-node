@@ -1,5 +1,6 @@
 import express, {Response, Request} from 'express'
 import { _getNotices, _createNotice, _removeNotice } from '../repositorys/notice-repository'
+import { Notices } from '@prisma/client'
 
 export const get = async (req: Request, res: Response) => {
     try {
@@ -20,10 +21,11 @@ export const create = async (req: Request, res: Response) => {
 }
 
 export const remove = async (req: Request, res: Response) => {
+    const {id}: Notices = req.body;
     try {
-        const notice = await _removeNotice(req.body.id)
-        res.status(200).send(`O usuário de id: "${req.body.id}" foi deletado!`)
+        _removeNotice(id)
+        res.status(200).send(`A notícia de id: "${id}" foi deletado!`)
     } catch (e) {
-        res.status(400).send(`O usuário de id: "${req.body.id}" não foi encontrado para ser removido!`)
+        res.status(400).send(`O notícia de id: "${id}" não foi encontrado para ser removido!`)
     }
 }
