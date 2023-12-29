@@ -3,6 +3,7 @@ CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "isAdmin" BOOLEAN,
     "isVolt" BOOLEAN,
+    "isEtg" BOOLEAN,
     "isCoordAutist" BOOLEAN,
     "isCoordMulher" BOOLEAN,
     "isCoordSaude" BOOLEAN,
@@ -10,6 +11,7 @@ CREATE TABLE "User" (
     "isCoordAlimentar" BOOLEAN,
     "isCoordPasse" BOOLEAN,
     "isCoordCidadania" BOOLEAN,
+    "isBusiness" BOOLEAN,
     "avatar" TEXT,
     "nome" TEXT NOT NULL,
     "idade" TEXT NOT NULL,
@@ -17,28 +19,30 @@ CREATE TABLE "User" (
     "address" TEXT NOT NULL,
     "bairro" TEXT NOT NULL,
     "cpf" TEXT NOT NULL,
-    "nis" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
+    "nis" TEXT,
+    "email" TEXT,
     "password" TEXT NOT NULL,
     "question1" BOOLEAN,
     "question2" TEXT,
-    "createAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "solicitationsId" INTEGER,
+    "createAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updateAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Parentes" (
+CREATE TABLE "Parente" (
     "id" SERIAL NOT NULL,
     "nome" TEXT NOT NULL,
+    "parentesco" TEXT,
     "cpf" TEXT NOT NULL,
     "idade" INTEGER NOT NULL,
     "isAutist" BOOLEAN NOT NULL,
     "isPcd" BOOLEAN NOT NULL,
-    "userId" INTEGER,
+    "user_id" INTEGER,
 
-    CONSTRAINT "Parentes_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Parente_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -76,7 +80,6 @@ CREATE TABLE "Notices" (
     "mensagem" TEXT NOT NULL,
     "img" TEXT NOT NULL,
     "createAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updateAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Notices_pkey" PRIMARY KEY ("id")
 );
@@ -85,4 +88,4 @@ CREATE TABLE "Notices" (
 ALTER TABLE "User" ADD CONSTRAINT "User_solicitationsId_fkey" FOREIGN KEY ("solicitationsId") REFERENCES "Solicitations"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Parentes" ADD CONSTRAINT "Parentes_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Parente" ADD CONSTRAINT "Parente_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;

@@ -26,9 +26,12 @@ export const create = async (req: Request, res: Response) => {
 }
 
 export const update = async(req: Request, res: Response) => {
+    const userId = parseInt(req.params.id, 8);
+    const userUpdate = req.body;
+    const newParents = req.body.parents
     try {
-        const user = await _updateUser(req?.body?.id, req.body)
-        res.send(200).send(`O usuário foi alterado: \n ${user}`)
+        const user = await _updateUser(userId, userUpdate, newParents)
+        res.status(200).send(`O usuário foi alterado!`)
     } catch (e) {
         res.status(400).send(e)
     }

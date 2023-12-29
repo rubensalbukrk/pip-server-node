@@ -1,5 +1,5 @@
 import { prisma } from './../services/prisma';
-import { Parente, User } from "@prisma/client";
+import { Parente, Prisma, User } from "@prisma/client";
 
 export const _createUser = async (data: User, parents: Parente) => {
     const user = await prisma.user.create({
@@ -9,9 +9,7 @@ export const _createUser = async (data: User, parents: Parente) => {
             idade: data.idade,
             cpf: data.cpf,
             address: data.address,
-            nis: data.nis,
             phone: data.phone,
-            email: data.email,
             bairro: data.bairro,
             password: data.password,
             parents: {
@@ -28,7 +26,38 @@ export const _createUser = async (data: User, parents: Parente) => {
 }
 
 export const _getUsers = async () => {
-    const users = await prisma.user.findMany()
+    const users = await prisma.user.findMany({
+        select: {
+            id: true,
+			isAdmin: true,
+			isVolt: true,
+			isEtg: true,
+			isCoordAutist: true,
+			isCoordMulher: true,
+			isCoordSaude: true,
+			isCoordProtagonista: true,
+			isCoordAlimentar: true,
+			isCoordPasse: true,
+			isCoordCidadania: true,
+			isBusiness: true,
+			avatar: true,
+			nome: true,
+			idade: true,
+			phone: true,
+			address: true,
+			bairro: true,
+			cpf: true,
+			nis: true,
+			email: true,
+			password: false,
+			question1: true,
+			question2: true,
+			solicitationsId: true,
+			createAt: true,
+            parents: true
+
+        }
+    })
     return users
 }
 export const _findUser = async (cpf: string, password: string) => {
@@ -40,6 +69,8 @@ export const _findUser = async (cpf: string, password: string) => {
                 id: true,
                 isAdmin: true,
                 isVolt: true,
+                isEtg: true,
+                isBusiness: true,
                 isCoordAutist: true,
                 isCoordMulher: true,
                 isCoordSaude: true,
@@ -65,12 +96,30 @@ export const _findUser = async (cpf: string, password: string) => {
     return user
 }
 
-export const _updateUser = async (id: number, data: User) => {
-    const post = await prisma.user.update({
-      where: {
-        id
-      },
-      data
+export const _updateUser = async (id: number, userUpdate: User, newParents: any) => {
+
+        const user = await prisma.user.update({
+            where: {
+                id: id
+            },
+            data: {
+                nome: userUpdate.nome,
+                idade: userUpdate.idade,
+                phone: userUpdate.phone,
+                address: userUpdate.address,
+                bairro: userUpdate.bairro,
+                cpf: userUpdate.cpf,
+                email: userUpdate.email,
+                parents: {
+                    deleteMany: {},
+                    createMany: {
+                        data: newParents
+                    }
+                }
+            },
+            include: {
+                parents: true,
+              },
     })
 }
 

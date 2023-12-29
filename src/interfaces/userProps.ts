@@ -29,9 +29,9 @@ interface UserProps {
     bairro: string
     phone: number
     cpf: string
-    nis: number
+    nis?: number
     parents: FilhosProps[]
-    email: string,
+    email?: string,
     password: string
     question1?: boolean
     question2?: string
