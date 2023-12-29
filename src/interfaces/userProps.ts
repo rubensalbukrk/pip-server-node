@@ -13,6 +13,7 @@ interface UserProps {
     isAdmin?: boolean
     isAutist?: boolean
     isVolt?: boolean
+    isEtg?: boolean
     isCoordAutist?: boolean
     isCoordMulher?: boolean
     isCoordSaude?: boolean

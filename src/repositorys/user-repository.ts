@@ -33,8 +33,7 @@ export const _getUsers = async () => {
 export const _findUser = async (cpf: string, password: string) => {
     const user = await prisma.user.findFirst({
         where: {
-            cpf: cpf,
-            password: password
+            cpf: cpf
         },
         select: {
                 id: true,

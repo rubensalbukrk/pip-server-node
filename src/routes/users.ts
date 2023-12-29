@@ -9,6 +9,6 @@ router.use(bodyParser.json());
   router.post("/", create)
   router.get("/", get)
   router.put("/:id", verifyToken, update)
-  router.delete("/:id", verifyToken, remove)
+  router.delete("/:id", remove)
 
 export default router;

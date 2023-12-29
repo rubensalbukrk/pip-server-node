@@ -7,14 +7,15 @@ export const get = async (req: Request, res: Response) => {
     try {
         const user = await _getUsers()
         res.status(200).send(user)
+        console.log(user)
     } catch (error) {
         res.status(400).send(error)
     }
 }
 
 export const create = async (req: Request, res: Response) => {
+    await userValidation.validate(req.body)
     try {
-        await userValidation.validate(req.body)
         const hashPass: String = await bcrypt.hash(req.body.password, 8);
         req.body.password = hashPass
         const {parents} = req.body
