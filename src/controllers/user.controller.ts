@@ -5,9 +5,8 @@ import bcrypt from 'bcrypt'
 
 export const get = async (req: Request, res: Response) => {
     try {
-        const user = await _getUsers()
-        res.status(200).send(user)
-        console.log(user)
+        const users = await _getUsers()
+        res.status(200).send({ results: users})
     } catch (error) {
         res.status(400).send(error)
     }
