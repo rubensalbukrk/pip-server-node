@@ -21,11 +21,11 @@ export const create = async (req: Request, res: Response) => {
 }
 
 export const remove = async (req: Request, res: Response) => {
-    const {id}: Notices = req.body;
+    const noticeId = parseInt(req.params.id)
     try {
-        _removeNotice(id)
-        res.status(200).send(`A notícia de id: "${id}" foi deletado!`)
+        _removeNotice(noticeId)
+        res.status(200).send(`A notícia de id: "${noticeId}" foi deletado!`)
     } catch (e) {
-        res.status(400).send(`O notícia de id: "${id}" não foi encontrado para ser removido!`)
+        res.status(400).send(`O notícia de id: "${noticeId}" não foi encontrado para ser removido!`)
     }
 }

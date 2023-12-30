@@ -39,6 +39,8 @@ export const _getUsers = async () => {
 			isCoordAlimentar: true,
 			isCoordPasse: true,
 			isCoordCidadania: true,
+            isCoordCursos: true,
+            isCoordOptometria: true,
 			isBusiness: true,
 			avatar: true,
 			nome: true,
@@ -78,6 +80,8 @@ export const _findUser = async (cpf: string, password: string) => {
                 isCoordAlimentar: true,
                 isCoordPasse: true,
                 isCoordCidadania: true,
+                isCoordCursos: true,
+                isCoordOptometria: true,
                 nome:true,
                 idade: true,
                 address: true,
@@ -98,18 +102,12 @@ export const _findUser = async (cpf: string, password: string) => {
 
 export const _updateUser = async (id: number, userUpdate: User, newParents: any) => {
 
-        const user = await prisma.user.update({
+    const user = await prisma.user.update({
             where: {
                 id: id
             },
             data: {
-                nome: userUpdate.nome,
-                idade: userUpdate.idade,
-                phone: userUpdate.phone,
-                address: userUpdate.address,
-                bairro: userUpdate.bairro,
-                cpf: userUpdate.cpf,
-                email: userUpdate.email,
+                ...userUpdate,
                 parents: {
                     deleteMany: {},
                     createMany: {

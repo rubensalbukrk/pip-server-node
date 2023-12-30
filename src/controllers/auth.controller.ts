@@ -31,6 +31,8 @@ export const authenticate = async (req: Request, res: Response, next: any) => {
                 isCoordAlimentar: user?.isCoordAlimentar,
                 isCoordPasse: user?.isCoordPasse,
                 isCoordCidadania: user?.isCoordCidadania,
+                isCoordCursos: user?.isCoordCursos,
+                isCoordOptometria: user?.isCoordOptometria,
                 isBusiness: user?.isBusiness,
                 nome: user.nome,
                 idade: user.idade,
@@ -40,11 +42,13 @@ export const authenticate = async (req: Request, res: Response, next: any) => {
                 avatar: user?.avatar,
                 cpf: user.cpf,
                 nis: user?.nis,
+                password: user?.password,
                 email: user?.email,
                 question1: user?.question1,
                 question2: user?.question2,
                 parents: user?.parents
             },
+            
             String(process.env.TOKEN_KEY),
             {
                 expiresIn: "3hr"

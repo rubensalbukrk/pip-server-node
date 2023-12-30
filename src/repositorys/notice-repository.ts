@@ -13,10 +13,10 @@ export const _getNotices = async () => {
     return notices
 }
 
-export const _removeNotice = async(id: number) => {
+export const _removeNotice = async(id: any) => {
     const notice = await prisma.notices.delete({
         where: {
-            id
+            id: id
         }
     })
 }

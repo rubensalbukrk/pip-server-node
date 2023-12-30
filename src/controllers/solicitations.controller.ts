@@ -24,7 +24,7 @@ export const create = async (req: Request, res: Response) => {
 }
 
 export const update = async(req: Request, res: Response) => {
-    const solicitationId = parseInt(req.params.id, 8)
+    const solicitationId = parseInt(req.params.id)
     const solicitationUpdate: Solicitations = req.body;
     try {
         const solicitation = await _updateSolicitation(solicitationId, solicitationUpdate)
@@ -35,10 +35,11 @@ export const update = async(req: Request, res: Response) => {
 }
 
 export const remove = async (req: Request, res: Response) => {
+    const solicitationId = parseInt(req.params.id);
     try {
-        _removeSolicitation(req.body.id)
+        _removeSolicitation(solicitationId)
         res.status(200).send(`Solicitação cancelada!`)
     } catch (e) {
-        res.status(400).send(`Solicitação de id: "${req.body.id}" não foi encontrada`)
+        res.status(400).send(`Solicitação de id: "${solicitationId}" não foi encontrada`)
     }
 }

@@ -19,6 +19,8 @@ model User {
   isCoordAlimentar    Boolean?
   isCoordPasse        Boolean?
   isCoordCidadania    Boolean?
+  isCoordCursos       Boolean?
+  isCoordOptometria   Boolean?
   isBusiness          Boolean?
   avatar              String?
   nome                String
