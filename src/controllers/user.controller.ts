@@ -38,10 +38,11 @@ export const update = async(req: Request, res: Response) => {
  }
 
 export const remove = async (req: Request, res: Response) => {
+    const userId = parseInt(req.params.id)
     try {
-        _removeUser(req.body.id)
-        res.status(200).send(`O usuário de id: "${req.body.id}" foi deletado!`)
+        _removeUser(userId)
+        res.status(200).send(`O usuário de id: "${userId}" foi deletado!`)
     } catch (e) {
-        res.status(400).send(`O usuário de id: "${req.body.id}" não foi encontrado para ser removido!`)
+        res.status(400).send(`O usuário de id: "${userId}" não foi encontrado para ser removido!`)
     }
 }
