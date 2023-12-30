@@ -46,7 +46,7 @@ model Parente {
   nome       String
   parentesco String?
   cpf        String
-  idade      Int
+  idade      String
   isAutist   Boolean
   isPcd      Boolean
   userId     Int?    @map("user_id")

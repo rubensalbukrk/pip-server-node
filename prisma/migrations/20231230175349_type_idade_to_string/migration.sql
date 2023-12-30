@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Parente" ALTER COLUMN "idade" SET DATA TYPE TEXT;
