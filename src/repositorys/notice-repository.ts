@@ -9,7 +9,15 @@ export const _createNotice = async (data: Notices) => {
 }
 
 export const _getNotices = async () => {
-    const notices = await prisma.notices.findMany()
+    const notices = await prisma.notices.findMany({
+        select: {
+            id: true,
+            title: true,
+            mensagem: true,
+            img: true,
+            date: true
+        }
+    })
     return notices
 }
 

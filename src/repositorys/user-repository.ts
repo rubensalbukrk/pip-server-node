@@ -51,7 +51,7 @@ export const _getUsers = async () => {
 			cpf: true,
 			nis: true,
 			email: true,
-			password: false,
+			password: true,
 			question1: true,
 			question2: true,
 			solicitationsId: true,
