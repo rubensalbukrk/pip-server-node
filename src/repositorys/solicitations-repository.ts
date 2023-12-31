@@ -9,6 +9,7 @@ export const _createSolicitation = async (data: Solicitations, userInfo: any) =>
             service: data.service,
             pasta: data.pasta,
             status: data.status,
+            date: data.date,
             userInfo: {
                 createMany: {
                     data: userInfo
@@ -31,7 +32,7 @@ export const _getSolicitations = async () => {
             service: true,
             pasta: true,
             status: true,
-            createAt: true,
+            date: true,
             userInfo: true
         }
     })

@@ -6,9 +6,9 @@ import bodyParser from 'body-parser';
 const router = express.Router()
 router.use(bodyParser.json());
 
-  router.post("/", create)
-  router.get("/", get)
+  router.post("/", verifyToken, create)
+  router.get("/", verifyToken, get)
   router.put("/:id", verifyToken, update)
-  router.delete("/:id", remove)
+  router.delete("/:id", verifyToken, remove)
 
 export default router;
