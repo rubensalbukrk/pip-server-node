@@ -1,9 +1,13 @@
 import { prisma } from "../services/prisma";
 import { Notices } from "@prisma/client";
+import dataNow from '../utils/data'
 
 export const _createNotice = async (data: Notices) => {
     const notice = await prisma.notices.create({
-        data
+        data: {
+            ...data,
+            date: dataNow
+        }
     })
     return notice
 }
