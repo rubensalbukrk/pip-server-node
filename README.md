@@ -1,4 +1,4 @@
-# NodeJS Simple API
+# NODE JS API REST + AUTHENTICATION JWT + PRISMA + POSTGRESQL
 
 <p align="center">
   <a href="#-tecnologias">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -16,12 +16,17 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - JavaScript
 - NodeJS
 - Express
+- TypeScript
+- Prisma
+- Postgresql
+- JWT
+- Jest
 
 
 
 ## 💻 Projeto
 
-Esse projeto foi construído para servir de apoio no estudo de consumo de APIs REST
+Esse projeto foi construído para o suprir a necessidade do projeto PIP que está disponível nas plataformas WEB e MOBILE.
 
 
 
@@ -40,5 +45,3 @@ Esse projeto foi construído para servir de apoio no estudo de consumo de APIs R
 Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](.github/LICENSE.md) para mais detalhes.
 
 ---
-
-Feito com ♥ by Jakeliny Gracielly
