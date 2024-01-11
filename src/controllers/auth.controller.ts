@@ -1,13 +1,40 @@
 import jwt from 'jsonwebtoken'
 import { Request, Response} from 'express'
-import { _findUser } from '../repositorys/user-repository'
 import bcrypt from 'bcrypt'
+import admin from "firebase-admin";
+import { _findUser } from '../repositorys/user-repository';
+
+const users = admin.firestore().collection('usuarios');
+
+const findUser = async (cpf, password) => {
+    try {
+        // Consulta para encontrar um usuário com base no CPF e senha
+        const querySnapshot = await users
+          .where('cpf', '==', cpf)
+          .where('password', '==', password)
+          .get();
+    
+        // Verifica se algum usuário foi encontrado
+        if (querySnapshot.size > 0) {
+          querySnapshot.forEach((doc) => {
+            const userData = doc.data();
+            console.log('Usuário encontrado:', userData);
+            return userData
+          });
+         
+        } else {
+          console.log('Nenhum usuário encontrado com o CPF e senha fornecidos.');
+        }
+      } catch (error) {
+        console.error('Erro ao procurar usuário:', error.message);
+      }
+}
 
 export const authenticate = async (req: Request, res: Response, next: any) => {
     
    try {
     const {cpf, password} = req.body
-    const user = await _findUser(cpf, password)
+    const user = await _findUser(cpf, password);
     if(!(cpf && password)){
         res.status(400).send('Email e senha são obrigatórios!')
     }
