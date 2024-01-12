@@ -1,40 +1,30 @@
 import jwt from 'jsonwebtoken'
 import { Request, Response} from 'express'
 import bcrypt from 'bcrypt'
-import admin from "firebase-admin";
 import { _findUser } from '../repositorys/user-repository';
+var db = require('../../firebase')
 
-const users = admin.firestore().collection('usuarios');
+const getUser = async (cpf: string, password: string) => {
 
-const findUser = async (cpf, password) => {
-    try {
-        // Consulta para encontrar um usuário com base no CPF e senha
-        const querySnapshot = await users
-          .where('cpf', '==', cpf)
-          .where('password', '==', password)
-          .get();
-    
-        // Verifica se algum usuário foi encontrado
-        if (querySnapshot.size > 0) {
-          querySnapshot.forEach((doc) => {
-            const userData = doc.data();
-            console.log('Usuário encontrado:', userData);
-            return userData
-          });
-         
-        } else {
-          console.log('Nenhum usuário encontrado com o CPF e senha fornecidos.');
-        }
-      } catch (error) {
-        console.error('Erro ao procurar usuário:', error.message);
-      }
-}
+  try {
+    const usersRef = db.collection('usuarios');
+    const user = await usersRef
+    .where('cpf', '==', cpf)
+    .get();
+
+    const thisUser = user.docs[0].data();
+    return thisUser
+  } catch (error) {
+    console.error("Problema ao obter usuário, tente novamente!")
+  }
+};
 
 export const authenticate = async (req: Request, res: Response, next: any) => {
     
    try {
     const {cpf, password} = req.body
-    const user = await _findUser(cpf, password);
+    const user = await getUser(cpf, password);
+    console.log(`Autenticado: ${user?.nome}`)
     if(!(cpf && password)){
         res.status(400).send('Email e senha são obrigatórios!')
     }
@@ -69,7 +59,7 @@ export const authenticate = async (req: Request, res: Response, next: any) => {
                 avatar: user?.avatar,
                 cpf: user.cpf,
                 nis: user?.nis,
-                password: user?.password,
+               
                 email: user?.email,
                 question1: user?.question1,
                 question2: user?.question2,
@@ -85,7 +75,7 @@ export const authenticate = async (req: Request, res: Response, next: any) => {
         res.status(200).send({token: token, user: decodedUser})
         
     }else {
-        res.status(401).send(`CPF e/ou senha inválidos!`)
+        res.status(401).send(`CPF e SENHA não confere`)
     }
 
    } catch (e) {

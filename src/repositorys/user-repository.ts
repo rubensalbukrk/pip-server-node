@@ -1,28 +1,42 @@
 import { prisma } from './../services/prisma';
 import { Parente, Prisma, User } from "@prisma/client";
+var db = require('../../firebase')
 
 export const _createUser = async (data: User, parents: Parente) => {
-    const user = await prisma.user.create({
-        data: {
-            isAdmin: data.isAdmin,
-            nome: data.nome,
-            idade: data.idade,
-            cpf: data.cpf,
-            address: data.address,
-            phone: data.phone,
-            bairro: data.bairro,
-            password: data.password,
-            parents: {
-                createMany: {
-                    data: parents
-                }
-            }
-        },
-        include: {
-            parents: true
-        }
-    })
-    return user
+
+    try {
+        const user = db.collection('usuarios')
+        .add({
+            ...data,
+            parents: parents
+        })
+        return user
+    } catch (error) {
+        return console.log(error)
+    }
+
+    // for database POSTGRESQL
+    // const user = await prisma.user.create({
+    //     data: {
+    //         isAdmin: data.isAdmin,
+    //         nome: data.nome,
+    //         idade: data.idade,
+    //         cpf: data.cpf,
+    //         address: data.address,
+    //         phone: data.phone,
+    //         bairro: data.bairro,
+    //         password: data.password,
+    //         parents: {
+    //             createMany: {
+    //                 data: parents
+    //             }
+    //         }
+    //     },
+    //     include: {
+    //         parents: true
+    //     }
+    // })
+    // return user
 }
 
 export const _getUsers = async () => {
