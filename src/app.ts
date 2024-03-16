@@ -9,7 +9,7 @@ app.use('/api', routes)
 
 app.get('/', (req, res) => {
     res.json({
-        message: "Bem vindo, este sistema está protegido e criptografado de ponta a ponta! 👋🌎"
+        message: "Bem vindo, estamos no ar! 👋🌎"
     })
 })
 

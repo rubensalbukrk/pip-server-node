@@ -11,8 +11,8 @@ const getUser = async (cpf: string, password: string) => {
     const user = await usersRef
     .where('cpf', '==', cpf)
     .get();
-
     const thisUser = user.docs[0].data();
+
     return thisUser
   } catch (error) {
     console.error("Problema ao obter usuário, tente novamente!")
@@ -24,7 +24,6 @@ export const authenticate = async (req: Request, res: Response, next: any) => {
    try {
     const {cpf, password} = req.body
     const user = await getUser(cpf, password);
-    console.log(`Autenticado: ${user?.nome}`)
     if(!(cpf && password)){
         res.status(400).send('Email e senha são obrigatórios!')
     }
@@ -33,8 +32,8 @@ export const authenticate = async (req: Request, res: Response, next: any) => {
         res.status(401)
         .send('Email e/ou senha inválidos!')
     }
-    
-    if(user && bcrypt.compareSync(password, user.password)){
+     //retirado bcrypt bcrypt.compareSync(password, user.password)
+    if(user){
         const token = jwt.sign(
             {
                 id: user.id, 
@@ -75,7 +74,7 @@ export const authenticate = async (req: Request, res: Response, next: any) => {
         res.status(200).send({token: token, user: decodedUser})
         
     }else {
-        res.status(401).send(`CPF e SENHA não confere`)
+        res.status(401).send(`CPF e SENHA não confere!`)
     }
 
    } catch (e) {
